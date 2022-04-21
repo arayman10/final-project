@@ -16,15 +16,23 @@ def create_nhl_table(cur, conn):
     cur.execute('CREATE TABLE IF NOT EXISTS Detroit_NHL (id INTEGER PRIMARY KEY, player_name TEXT, weight INTEGER)')
     conn.commit()
 
+"""
 def get_player_data():
     data = requests.get('https://records.nhl.com/site/api/player/byTeam/17')
     load_data = json.loads(data.text)
     print(load_data)
+"""
+def getPlayerData():
+    resp = requests.get('https://www.balldontlie.io/api/v1/players/')
+    data = json.loads(resp.text)
+    print(data)
 
 def main():
     cur,conn = setUpDatabase('nhl.db')
     create_nhl_table(cur, conn)
-    get_player_data()
+    #get_player_data()
+    getPlayerData()
+
     
 main()
 
