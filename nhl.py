@@ -19,7 +19,14 @@ def create_nhl_table(cur, conn):
 def get_player_data():
     data = requests.get('https://records.nhl.com/site/api/player/byTeam/17')
     load_data = json.loads(data.text)
-    print(load_data)
+    #print(load_data)
+    player_weight = {}
+    for i in load_data["data"]:
+        name = i['fullName']
+        weight = i['weight']
+        player_weight[name] = int(weight)
+    print(player_weight)
+
 
 def main():
     cur,conn = setUpDatabase('nhl.db')
