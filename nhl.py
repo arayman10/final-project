@@ -25,13 +25,19 @@ def get_player_data():
         name = i['fullName']
         weight = i['weight']
         player_weight[name] = int(weight)
-    print(player_weight)
+    return player_weight
+
+def addPlayerWeightsToTable(cur, conn, dict):
+    for i in dict.items():
+        cur.execute('INSERT INTO Detroit_NHL (player_name, weight) VALUES (?, ?)', (i[0], i[1]))
+    conn.commit()
 
 
 def main():
     cur,conn = setUpDatabase('nhl.db')
     create_nhl_table(cur, conn)
-    get_player_data()
+    players_data = get_player_data()
+    addPlayerWeightsToTable(cur, conn, players_data)
     
 main()
 
