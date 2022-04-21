@@ -19,6 +19,9 @@ def getPlayerData():
     resp = requests.get('https://www.balldontlie.io/api/v1/players/')
     data = json.loads(resp.text)
     print(data)
+    dict = {}
+    
+    
 
 def main():
     cur, conn = setUpDatabase('nba.db')
