@@ -14,7 +14,7 @@ def setUpDatabase(db_name):
     return cur, conn
 
 def createNbaTable(cur, conn):
-    cur.execute('CREATE TABLE IF NOT EXISTS Detroit_NBA (id INTEGER PRIMARY KEY, player_id INTEGER, weight INTEGER)')
+    cur.execute('CREATE TABLE IF NOT EXISTS Detroit_NBA (id INTEGER PRIMARY KEY, player_name TEXT, weight INTEGER)')
     conn.commit()
 lst = ['Bagley', 'Saddiq', 'Cunningham', 'Hamidou', 'Carsen', 'Garza', 'Jerami', 'Killian', 'Frank', 'Joseph', 'Braxton', 'Saben', 'Livers', 'McGruder', 'Olynyk', 'Jamorko', 'Stewart']
 full_names = ['Marvin Bagley III', 'Saddiq Bey', 'Cade Cunningham', 'Hamidou Diallo', 'Carsen Edwards', ' Luka Garza', 'Jerami Grant', 'Killian Hayes', 'Frank Jackson', 'Cory Joseph', 'Braxton Key', 'Saben Lee', 'Isaiah Livers', 'Rodney McGruder', 'Kelly Olynyk', 'Jamorko Pickett', 'Isaiah Stewart']
@@ -34,11 +34,16 @@ def getPlayerData(full_name, single, dict):
             dict[full_name] = weight
     return None
 
+def addPlayerWeightsToTable(cur, conn):
+    for i in players.items():
+        cur.execute('INSERT INTO Detroit_NBA (player_name, weight VALUES (?, ?)', i[0], i[1])
+    conn.commit()
 def main():
     cur, conn = setUpDatabase('nba.db')
     createNbaTable(cur, conn)
     for i in range(len(full_names)):
         getPlayerData(full_names[i], lst[i], players)
+    addPlayerWeightsToTable(cur, conn)
 main()
 
 print(players)
