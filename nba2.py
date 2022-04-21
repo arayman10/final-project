@@ -34,16 +34,16 @@ def getPlayerData(full_name, single, dict):
             dict[full_name] = weight
     return None
 
-def addPlayerWeightsToTable(cur, conn):
-    for i in players.items():
-        cur.execute('INSERT INTO Detroit_NBA (player_name, weight VALUES (?, ?)', i[0], i[1])
+def addPlayerWeightsToTable(cur, conn, dict):
+    for i in dict.items():
+        cur.execute('INSERT INTO Detroit_NBA (player_name, weight) VALUES (?, ?)', (i[0], i[1]))
     conn.commit()
 def main():
     cur, conn = setUpDatabase('nba.db')
     createNbaTable(cur, conn)
     for i in range(len(full_names)):
         getPlayerData(full_names[i], lst[i], players)
-    addPlayerWeightsToTable(cur, conn)
+    addPlayerWeightsToTable(cur, conn, players)
 main()
 
 print(players)
