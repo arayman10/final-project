@@ -15,6 +15,13 @@ def createNbaTable(cur, conn):
     cur.execute('CREATE TABLE IF NOT EXISTS Detroit_NBA (id INTEGER PRIMARY KEY, player_id INTEGER, weight INTEGER)')
     conn.commit()
 
+def getPlayerData():
+    resp = requests.get('https://www.balldontlie.io/api/v1/players/')
+    data = json.loads(resp.text)
+    print(data)
+    return data
+
+
 def main():
     cur, conn = setUpDatabase('nba.db')
     createNbaTable(cur, conn)
