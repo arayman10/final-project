@@ -22,17 +22,11 @@ def get_player_data():
     load_data = json.loads(data.text)
     print(load_data)
 """
-def getPlayerData():
-    resp = requests.get('https://www.balldontlie.io/api/v1/players/')
-    data = json.loads(resp.text)
-    print(data)
 
 def main():
     cur,conn = setUpDatabase('nhl.db')
     create_nhl_table(cur, conn)
     #get_player_data()
-    getPlayerData()
-
     
 main()
 
