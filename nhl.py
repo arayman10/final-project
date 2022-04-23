@@ -20,7 +20,7 @@ def get_player_data():
     data = requests.get('https://records.nhl.com/site/api/player')
     load_data = json.loads(data.text)
     player_weight = []
-    for i in range(200):
+    for i in range(150):
         dict = load_data["data"][i]
         name = dict['fullName']
         weight = dict['weight']
