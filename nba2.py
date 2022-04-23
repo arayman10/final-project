@@ -17,9 +17,9 @@ def createNbaTable(cur, conn):
     conn.commit()
 
 
-player_weight = {}
+player_weight = []
 
-def getPlayerData(dict):
+def getPlayerData(lst):
     for i in range(1,38):
         querystring = {'per_page': '100', 'page': str(i)}
         resp = requests.get('https://www.balldontlie.io/api/v1/players/', params=querystring)
@@ -30,20 +30,26 @@ def getPlayerData(dict):
             full_name = first + " " + last
             weight = i["weight_pounds"]
             try:
-                dict[full_name] = int(weight)
+                lst.append((full_name, int(weight)))
             except:
-                print('Not a number')
+                None
     return None
 
-def addPlayerWeightsToTable(cur, conn, dict):
-    for i in dict.items():
-        cur.execute('INSERT INTO Detroit_NBA (player_name, weight) VALUES (?, ?)', (i[0], i[1]))
+def addPlayerWeightsToTable(cur, conn, lst):
+    count = 0
+    for i in range(len(lst)):
+        if count > 24:
+            break
+        if cur.execute('SELECT player_name FROM Detroit_NBA WHERE player_name = ? AND weight = ?', (lst[i][0], lst[i][1])).fetchone() == None:
+            cur.execute('INSERT OR IGNORE INTO Detroit_NBA (player_name, weight) VALUES (?, ?)', (lst[i][0], lst[i][1]))
+            count += 1
     conn.commit()
 def main():
-    cur, conn = setUpDatabase('nba2.db')
+    cur, conn = setUpDatabase('nba.db')
     createNbaTable(cur, conn)
     getPlayerData(player_weight)
     addPlayerWeightsToTable(cur, conn, player_weight)
+    print(player_weight)
 main()
 
 
