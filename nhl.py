@@ -34,8 +34,9 @@ def addPlayerWeightsToTable(cur, conn, tup_lst):
     for i in range(len(tup_lst)):
         if count > 24:
             break
-        cur.execute('INSERT INTO Detroit_NHL (player_name, weight) VALUES (?, ?)', (tup_lst[i][0], tup_lst[i][1]))
-        count += 1
+        if cur.execute('SELECT player_name FROM Detroit_NHL WHERE player_name = ? AND weight = ?', tup_lst[i][0], tup_lst[i][1]).fetchone() == None:
+            cur.execute('INSERT OR IGNORE INTO Detroit_NHL (player_name, weight) VALUES (?, ?)', (tup_lst[i][0], tup_lst[i][1]))
+            count += 1
     conn.commit()
 
 def main():
