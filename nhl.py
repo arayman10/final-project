@@ -13,7 +13,7 @@ def setUpDatabase(db_name):
     return cur, conn
 
 def create_nhl_table(cur, conn):
-    cur.execute('CREATE TABLE IF NOT EXISTS Detroit_NHL (id INTEGER PRIMARY KEY, player_name TEXT, weight INTEGER)')
+    cur.execute('CREATE TABLE IF NOT EXISTS Detroit_NHL (id INTEGER PRIMARY KEY, player_name TEXT, weight INTEGER, team_id INTEGER)')
     conn.commit()
 
 def create_team_table(cur, conn):
@@ -28,6 +28,7 @@ def team_data(cur, conn):
         id = x['id']
         name = x['name']
         teams.append((id,name))
+    print(teams)
     count = 0
     for i in range(len(teams)):
         if count > 24:
@@ -46,7 +47,8 @@ def get_player_data():
         dict = load_data["data"][i]
         name = dict['fullName']
         weight = dict['weight']
-        tup = (name, weight)
+        team_id = dict['careerTeamId']
+        tup = (name, weight, team_id)
         player_weight.append(tup)
     return player_weight
 
@@ -55,8 +57,8 @@ def addPlayerWeightsToTable(cur, conn, tup_lst):
     for i in range(len(tup_lst)):
         if count > 24:
             break
-        if cur.execute('SELECT player_name FROM Detroit_NHL WHERE player_name = ? AND weight = ?', (tup_lst[i][0], tup_lst[i][1])).fetchone() == None:
-            cur.execute('INSERT OR IGNORE INTO Detroit_NHL (player_name, weight) VALUES (?, ?)', (tup_lst[i][0], tup_lst[i][1]))
+        if cur.execute('SELECT player_name FROM Detroit_NHL WHERE player_name = ? AND weight = ? AND team_id = ?', (tup_lst[i][0], tup_lst[i][1], tup_lst[i][2])).fetchone() == None:
+            cur.execute('INSERT OR IGNORE INTO Detroit_NHL (player_name, weight, team_id) VALUES (?, ?, ?)', (tup_lst[i][0], tup_lst[i][1], tup_lst[i][2]))
             count += 1
     conn.commit()
 
