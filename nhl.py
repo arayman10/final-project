@@ -20,7 +20,7 @@ def get_player_data():
     data = requests.get('https://records.nhl.com/site/api/player')
     load_data = json.loads(data.text)
     player_weight = []
-    for i in range(25):
+    for i in range(200):
         dict = load_data["data"][i]
         name = dict['fullName']
         weight = dict['weight']
@@ -29,11 +29,14 @@ def get_player_data():
     print(player_weight)
     return player_weight
 
-#def addPlayerWeightsToTable(cur, conn, tup_lst):
-    #for i in tup_lst:
-        #cur.execute('INSERT INTO Detroit_NHL (player_name, weight) VALUES (?, ?)', (i[0], i[1]))
-    #conn.commit()
-
+def addPlayerWeightsToTable(cur, conn, tup_lst):
+    count = 0
+    for i in range(len(tup_lst)):
+        if count > 24:
+            break
+        cur.execute('INSERT INTO Detroit_NHL (player_name, weight) VALUES (?, ?)', (tup_lst[i][0], tup_lst[i][1]))
+        count += 1
+    conn.commit()
 
 def main():
     cur,conn = setUpDatabase('nhl.db')
