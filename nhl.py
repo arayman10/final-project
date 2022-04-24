@@ -88,7 +88,7 @@ team_count = {}
 def players_per_team(dict, num, cur, conn):
     cur.execute('SELECT TeamNames.team FROM Detroit_NHL JOIN TeamNames ON Detroit_NHL.team_id = TeamNames.id WHERE Detroit_NHL.team_id = ?', (num,))
     team = cur.fetchall()
-    if len(team) > 1:
+    if len(team) > 0:
         dict[team[0][0]] = 0
         for player in team:
             dict[team[0][0]] += 1
