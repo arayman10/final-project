@@ -28,7 +28,6 @@ def team_data(cur, conn):
         id = x['id']
         name = x['name']
         teams.append((id,name))
-    
     count = 0
     for i in range(len(teams)):
         if count > 24:
@@ -37,7 +36,7 @@ def team_data(cur, conn):
             cur.execute('INSERT OR IGNORE INTO TeamNames (team, data_id) VALUES (?, ?)', (teams[i][1], teams[i][0]))
             count += 1
     conn.commit()
-    return None
+    return teams
 
 def get_player_data(cur, conn):
     data = requests.get('https://records.nhl.com/site/api/player')
@@ -84,15 +83,29 @@ def get_avg_weight(players_data):
     print(avg_weight)
     return avg_weight
 
+team_count = {}
+
+def players_per_team(dict, num, cur, conn):
+    cur.execute('SELECT TeamNames.team FROM Detroit_NHL JOIN TeamNames ON Detroit_NHL.team_id = TeamNames.id WHERE Detroit_NHL.team_id = ?', (num,))
+    team = cur.fetchall()
+    if len(team) > 1:
+        dict[team[0][0]] = 0
+        for player in team:
+            dict[team[0][0]] += 1
+    conn.commit()
+    return None
 
 def main():
     cur,conn = setUpDatabase('nhl.db')
     create_nhl_table(cur, conn)
     create_team_table(cur,conn)
-    team_data(cur,conn)
+    teams = team_data(cur,conn)
     players_data = get_player_data(cur, conn)
     addPlayerWeightsToTable(cur, conn, players_data)
     get_avg_weight(players_data)
+    for num in range(len(teams)):
+        players_per_team(team_count, num+1, cur, conn)
+    print(team_count)
     
 main()
 
