@@ -57,8 +57,7 @@ def get_player_data(cur, conn):
             if item[2] == row[1]:
                 team_id = row[0]
                 new_player_weight.append((item[0], item[1], item[2], team_id))
-    conn.commit()
-    print(len(new_player_weight))    
+    conn.commit()    
     return new_player_weight
 
 def addPlayerWeightsToTable(cur, conn, tup_lst):
