@@ -120,10 +120,26 @@ def add_to_table3(cur, conn, lst):
             count += 1
     conn.commit()
 
-'''
+weight_lst = []
+def get_avg_weight(lst):
+    for i in tigers_player_weight:
+        lst.append(i[1])
+    for i in yankees_player_weight:
+        lst.append(i[1])
+    for i in dodgers_player_weight:
+        lst.append(i[1])
+    print(sorted(lst))
+    count = len(lst)
+    total_weight = 0
+    for number in lst:
+        total_weight += int(number)
+    avg_weight = total_weight/count
+    print(avg_weight)
+    return avg_weight
+    
 #GRAPHING
 import matplotlib.pyplot as plt
-plt.hist(tigers_rosters_int, bins= 12)
+plt.hist(weight_lst, bins= 12)
 plt.xlim(160, 280)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
 plt.title("Weights of Detroit Tigers Players", fontsize = 20)
@@ -167,7 +183,7 @@ plt.xlabel("Team", fontsize = 12 )
 plt.ylabel("Average Player Weight", fontsize= 12)
 plt.bar(x_title, y_title, color = color_lst)
 plt.show()
-'''
+
 
 def main():
     cur, conn = setUpDatabase('mlb.db')
@@ -178,4 +194,5 @@ def main():
     add_to_table(cur,conn,tigers_player_weight)
     add_to_table2(cur,conn,yankees_player_weight)
     add_to_table3(cur,conn,dodgers_player_weight)
+    get_avg_weight(weight_lst)
 main()
