@@ -89,6 +89,7 @@ plt.hlines(1, 250, 270, color = "orange")
 plt.hlines(2, 270, 280, color = "orange")
 plt.show()
 '''
+plt.show()
 
 def main():
     cur, conn = setUpDatabase('nba.db')
