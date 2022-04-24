@@ -21,7 +21,7 @@ def createMlbTable(cur, conn):
     cur.execute('CREATE TABLE IF NOT EXISTS MLB_Players (id INTEGER PRIMARY KEY, player_name TEXT, weight INTEGER)')
     conn.commit()
 
-player_weight = []
+tigers_player_weight = []
 
 def get_tigers_players(lst):
     base_url = "http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='116'"
@@ -37,6 +37,40 @@ def get_tigers_players(lst):
         except:
             None
     return None
+
+yankees_player_weight = []
+
+def get_yankees_player(lst):
+    base_url = "http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='147'"
+    res = requests.get(base_url)
+    data = json.loads(res.text)
+    for i in data['roster_40']['queryResults']['row']:
+        first = i['name_first']
+        last = i['name_last']
+        total = first + ' ' + last
+        weight = i['weight']
+        try:
+            lst.append((total, int(weight)))
+        except:
+            None
+    return None
+
+dodgers_player_weight = []
+def get_dodgers_player(lst):
+    base_url = "http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='119'"
+    res = requests.get(base_url)
+    data = json.loads(res.text)
+    for i in data['roster_40']['queryResults']['row']:
+        first = i['name_first']
+        last = i['name_last']
+        total = first + ' ' + last
+        weight = i['weight']
+        try:
+            lst.append((total, int(weight)))
+        except:
+            None
+    return None
+
 
 '''
     new_lst = data['roster_40']['queryResults']['row']
@@ -59,7 +93,27 @@ tigers_avg_weight = total_weight/count
 def add_to_table(cur, conn, lst):
     count = 0
     for i in range(len(lst)):
-        if count > 24:
+        if count > 7:
+            break
+        if cur.execute('SELECT player_name FROM MLB_Players WHERE player_name = ? AND weight = ?', (lst[i][0], lst[i][1])).fetchone() == None:
+            cur.execute('INSERT OR IGNORE INTO MLB_Players (player_name, weight) VALUES (?, ?)', (lst[i][0], lst[i][1]))
+            count += 1
+    conn.commit()
+
+def add_to_table2(cur, conn, lst):
+    count = 0
+    for i in range(len(lst)):
+        if count > 7:
+            break
+        if cur.execute('SELECT player_name FROM MLB_Players WHERE player_name = ? AND weight = ?', (lst[i][0], lst[i][1])).fetchone() == None:
+            cur.execute('INSERT OR IGNORE INTO MLB_Players (player_name, weight) VALUES (?, ?)', (lst[i][0], lst[i][1]))
+            count += 1
+    conn.commit()
+
+def add_to_table3(cur, conn, lst):
+    count = 0
+    for i in range(len(lst)):
+        if count > 7:
             break
         if cur.execute('SELECT player_name FROM MLB_Players WHERE player_name = ? AND weight = ?', (lst[i][0], lst[i][1])).fetchone() == None:
             cur.execute('INSERT OR IGNORE INTO MLB_Players (player_name, weight) VALUES (?, ?)', (lst[i][0], lst[i][1]))
@@ -118,6 +172,10 @@ plt.show()
 def main():
     cur, conn = setUpDatabase('mlb.db')
     createMlbTable(cur, conn)
-    get_tigers_players(player_weight)
-    add_to_table(cur,conn,player_weight)
+    get_tigers_players(tigers_player_weight)
+    get_yankees_player(yankees_player_weight)
+    get_dodgers_player(dodgers_player_weight)
+    add_to_table(cur,conn,tigers_player_weight)
+    add_to_table2(cur,conn,yankees_player_weight)
+    add_to_table3(cur,conn,dodgers_player_weight)
 main()
