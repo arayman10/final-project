@@ -71,6 +71,21 @@ def addPlayerWeightsToTable(cur, conn, tup_lst):
             count += 1
     conn.commit()
 
+def get_avg_weight(players_data):
+    weight_lst = []
+    for i in players_data:
+        weight = i[1]
+        weight_lst.append(weight)
+    print(sorted(weight_lst))
+    count = len(weight_lst)
+    total_weight = 0
+    for number in weight_lst:
+        total_weight += int(number)
+    avg_weight = total_weight/count
+    print(avg_weight)
+    return avg_weight
+
+
 def main():
     cur,conn = setUpDatabase('nhl.db')
     create_nhl_table(cur, conn)
@@ -78,6 +93,7 @@ def main():
     team_data(cur,conn)
     players_data = get_player_data(cur, conn)
     addPlayerWeightsToTable(cur, conn, players_data)
+    get_avg_weight(players_data)
     
 main()
 
