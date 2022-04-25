@@ -158,9 +158,8 @@ print(len(weight_lst))
 import matplotlib.pyplot as plt
 import numpy as np
 plt.hist(weight_lst, bins= 12, color= 'blue')
-x = [145,155,165,175,]
-y = [0,1,2,3,4]
-plt.plot(x,y)
+x = [145,155,165,175,185,195,205,215,225,235,245,255,265,275,285]
+y = [0,10,20,30,40,50,60,70,80]
 plt.xticks(np.arange(min(x), max(x)+1, 1.0))
 
 plt.xlim(145, 285)
@@ -195,14 +194,14 @@ plt.show()
 
 #BAR CHART SAMPLE
 import matplotlib.pyplot as plt
-tigers_avg_weight = 214.5
-pistons_avg_weight = 220
-redwings_avg_weight = 280
-x_title = ["Tigers", "Pistons", "Red Wings"]
-y_title = [tigers_avg_weight, pistons_avg_weight, redwings_avg_weight]
-color_lst = ["orange", "blue", "red"]
-plt.title("Average Player Weights of Detroit's Major League Sports Teams", fontsize= 13)
-plt.xlabel("Team", fontsize = 12 )
+MLB_avg_weight = 209.35
+NBA_avg_weight = 217.97684210526316
+NHL_avg_weight = 174.11818181818182
+x_title = ["Baseball", "Basketball", "Hockey"]
+y_title = [MLB_avg_weight, NBA_avg_weight, NHL_avg_weight]
+color_lst = ["blue", "orange", "red"]
+plt.title("Average Player Weights across the MLB, NBA & NHL", fontsize= 13)
+plt.xlabel("Sport", fontsize = 12 )
 plt.ylabel("Average Player Weight", fontsize= 12)
 plt.bar(x_title, y_title, color = color_lst)
 plt.show()
