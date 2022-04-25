@@ -195,4 +195,5 @@ def main():
     add_to_table2(cur,conn,yankees_player_weight)
     add_to_table3(cur,conn,dodgers_player_weight)
     get_avg_weight(weight_lst)
+    print(weight_lst)
 main()
