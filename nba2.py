@@ -63,7 +63,7 @@ def main():
 main()
 
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color= 'orange')
+plt.hist(weight_lst, bins= 12, color= 'orange', edgecolor= 'black', linewidth= 1.2)
 plt.xlim(170, 290)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 28))
 plt.title("Weights of NBA Players", fontsize = 20)
@@ -71,7 +71,7 @@ plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
 
 
-
+'''
 plt.vlines(170, 0, 37, color = "black")
 plt.vlines(180, 0, 37, color = "black")
 plt.vlines(190, 0, 51, color = "black")
@@ -98,6 +98,7 @@ plt.hlines(28, 250, 260, color = "black")
 plt.hlines(13, 260, 270, color = "black")
 plt.hlines(9, 270, 280, color = "black")
 plt.hlines(1, 280, 290, color = "black")
+'''
 plt.show()
 
 
