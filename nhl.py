@@ -96,7 +96,7 @@ def players_per_team(dict, num, cur, conn):
     return None
 
 def main():
-    cur,conn = setUpDatabase('nhl.db')
+    cur,conn = setUpDatabase('final.db')
     create_nhl_table(cur, conn)
     create_team_table(cur,conn)
     teams = team_data(cur,conn)
