@@ -52,7 +52,7 @@ def sorting_weights(lst, filename):
     min_max_tup = (lst[0], lst[-1])
     with open(filename, 'w') as file:
         writer = csv.writer(file)
-        writer.writerow(('The minimum and maximum weights of NBA players in the Detroit_NBA table', min_max_tup))
+        writer.writerow(('The minimum and maximum weights of NBA players in the Detroit_NBA table ', min_max_tup))
     file.close()
     return min_max_tup
 
@@ -62,7 +62,7 @@ def avg_weight(cur, conn, filename):
     conn.commit()
     with open(filename, 'w') as file:
         writer = csv.writer(file)
-        writer.writerow(('The average weight of the NBA players in the Detroit_NBA table', avg))
+        writer.writerow(('The average weight of the NBA players in the Detroit_NBA table ', avg))
     file.close()
     return avg
 
@@ -76,7 +76,7 @@ def main():
 main()
 
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color= 'orange', edgecolor= 'black', linewidth= 1.2)
+plt.hist(weight_lst, bins= 12, color= 'orange')
 plt.xlim(170, 290)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 28))
 plt.title("Weights of NBA Players", fontsize = 20)
@@ -84,7 +84,7 @@ plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
 
 
-'''
+
 plt.vlines(170, 0, 37, color = "black")
 plt.vlines(180, 0, 37, color = "black")
 plt.vlines(190, 0, 51, color = "black")
@@ -111,7 +111,6 @@ plt.hlines(28, 250, 260, color = "black")
 plt.hlines(13, 260, 270, color = "black")
 plt.hlines(9, 270, 280, color = "black")
 plt.hlines(1, 280, 290, color = "black")
-'''
 plt.show()
 
 
