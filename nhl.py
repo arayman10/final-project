@@ -4,8 +4,6 @@ import os
 import json
 import time
 
-#Red Wings players data https://records.nhl.com/site/api/player/byTeam/17
-
 def setUpDatabase(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path + '/' + db_name)
