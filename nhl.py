@@ -3,6 +3,7 @@ import sqlite3
 import os
 import json
 import time
+import matplotlib.pyplot as plt
 
 def setUpDatabase(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
@@ -93,6 +94,14 @@ def players_per_team(dict, num, cur, conn):
     conn.commit()
     return None
 
+#create pie chart
+labels = 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins', 'Boston Bruins', 'Montréal Canadiens', 'Toronto Maple Leafs', 'Washington Capitals', 'Chicago Blackhawks', 'Detroit Red Wings', 'St. Louis Blues', 'Edmonton Oilers', 'Vancouver Canucks', 'Los Angeles Kings'
+sizes = [16, 2, 3, 17, 15, 20, 3, 13, 15, 1, 1, 2, 2]
+
+plt.pie(sizes, labels=labels)
+plt.axis('equal')
+plt.show
+
 def main():
     cur,conn = setUpDatabase('final.db')
     create_nhl_table(cur, conn)
@@ -103,7 +112,6 @@ def main():
     get_avg_weight(players_data)
     for num in range(len(teams)):
         players_per_team(team_count, num+1, cur, conn)
-    print(team_count)
     
 main()
 
