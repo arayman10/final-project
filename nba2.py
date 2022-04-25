@@ -56,6 +56,20 @@ def get_avg_weight(lst):
     print(avg_weight)
     return avg_weight
 
+
+
+
+
+def main():
+    cur, conn = setUpDatabase('final.db')
+    createNbaTable(cur, conn)
+    getPlayerData(player_weight)
+    addPlayerWeightsToTable(cur, conn, player_weight)
+    get_avg_weight(weight_lst)
+    print(weight_lst)
+main()
+
+
 import matplotlib.pyplot as plt
 plt.hist(weight_lst, bins= 12, color = 'green')
 plt.xlim(165, 295)
@@ -86,15 +100,3 @@ plt.hlines(2, 240, 250, color = "orange")
 plt.hlines(1, 250, 270, color = "orange")
 plt.hlines(2, 270, 280, color = "orange")
 plt.show()
-
-
-
-def main():
-    cur, conn = setUpDatabase('final.db')
-    createNbaTable(cur, conn)
-    getPlayerData(player_weight)
-    addPlayerWeightsToTable(cur, conn, player_weight)
-    get_avg_weight(weight_lst)
-main()
-
-
