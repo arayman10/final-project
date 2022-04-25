@@ -99,7 +99,7 @@ labels = 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins', 'Bost
 sizes = [16, 2, 3, 17, 15, 20, 3, 13, 15, 1, 1, 2, 2]
 
 plt.pie(sizes, labels=labels, autopct='%1.1f%%', labeldistance=0.85, radius=5)
-plt.title("Players Per Team")
+plt.title("Players Per NHL Team")
 plt.axis('equal')
 plt.show()
 
