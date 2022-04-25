@@ -98,7 +98,8 @@ def players_per_team(dict, num, cur, conn):
 labels = 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins', 'Boston Bruins', 'Montréal Canadiens', 'Toronto Maple Leafs', 'Washington Capitals', 'Chicago Blackhawks', 'Detroit Red Wings', 'St. Louis Blues', 'Edmonton Oilers', 'Vancouver Canucks', 'Los Angeles Kings'
 sizes = [16, 2, 3, 17, 15, 20, 3, 13, 15, 1, 1, 2, 2]
 
-plt.pie(sizes, labels=labels)
+plt.pie(sizes, labels=labels, autopct='%1.1f%%')
+plt.title("Players Per Team")
 plt.axis('equal')
 plt.show()
 
