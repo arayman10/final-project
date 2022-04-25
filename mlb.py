@@ -136,13 +136,13 @@ def get_avg_weight(lst):
     avg_weight = total_weight/count
     print(avg_weight)
     return avg_weight
-    
+
 #GRAPHING
 import matplotlib.pyplot as plt
 plt.hist(weight_lst, bins= 12, color= 'green')
 plt.xlim(160, 280)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
-plt.title("Weights of Detroit Tigers Players", fontsize = 20)
+plt.title("Weights of MLB Players", fontsize = 20)
 plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
 
