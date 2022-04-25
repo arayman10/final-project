@@ -68,7 +68,7 @@ def addPlayerWeightsToTable(cur, conn, tup_lst):
             count += 1
     conn.commit()
 
-def get_avg_weight(players_data):
+def get_avg_weight(players_data):   
     weight_lst = []
     for i in players_data:
         weight = i[1]
@@ -113,6 +113,7 @@ def main():
     get_avg_weight(players_data)
     for num in range(len(teams)):
         players_per_team(team_count, num+1, cur, conn)
+    print(team_count)
     
 main()
 
