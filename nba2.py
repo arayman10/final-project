@@ -54,12 +54,19 @@ def get_avg_weight(lst):
     avg_weight = total_weight/count
     return avg_weight
 
+def avg_weight(cur, conn):
+    cur.execute('SELECT AVG(weight) FROM Detroit_NBA')
+    avg = cur.fetchone()[0]
+    conn.commit()
+    return avg
+
 def main():
     cur, conn = setUpDatabase('final.db')
     createNbaTable(cur, conn)
     getPlayerData(player_weight)
     addPlayerWeightsToTable(cur, conn, player_weight)
     get_avg_weight(weight_lst)
+    print(avg_weight(cur, conn))
 main()
 
 import matplotlib.pyplot as plt
