@@ -81,9 +81,12 @@ def get_avg_weight(players_data):
     avg_weight = total_weight/count
     print(avg_weight)
     return avg_weight
+
 def avg_weight(cur, conn):
     cur.execute('SELECT AVG(weight) FROM Detroit_NHL')
-    return cur.fetchone()[0]
+    avg = cur.fetchone()[0]
+    conn.commit()
+    return avg
 
 team_count = {}
 
