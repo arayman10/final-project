@@ -81,6 +81,9 @@ def get_avg_weight(players_data):
     avg_weight = total_weight/count
     print(avg_weight)
     return avg_weight
+def avg_weight(cur, conn):
+    cur.execute('SELECT AVG(weight) FROM Detroit_NHL')
+    return cur.fetchone()[0]
 
 team_count = {}
 
@@ -105,15 +108,16 @@ plt.show()
 
 def main():
     cur,conn = setUpDatabase('final.db')
-    create_nhl_table(cur, conn)
-    create_team_table(cur,conn)
-    teams = team_data(cur,conn)
+    #create_nhl_table(cur, conn)
+    #create_team_table(cur,conn)
+    #teams = team_data(cur,conn)
     players_data = get_player_data(cur, conn)
-    addPlayerWeightsToTable(cur, conn, players_data)
+   #addPlayerWeightsToTable(cur, conn, players_data)
     get_avg_weight(players_data)
-    for num in range(len(teams)):
-        players_per_team(team_count, num+1, cur, conn)
-    print(team_count)
+    print(avg_weight(cur, conn))
+    #for num in range(len(teams)):
+        #players_per_team(team_count, num+1, cur, conn)
+    #print(team_count)
     
 main()
 
