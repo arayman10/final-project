@@ -156,29 +156,24 @@ main()
 print(len(weight_lst))
 #GRAPHING
 import matplotlib.pyplot as plt
-import numpy as np
-plt.hist(weight_lst, bins= 12, color= 'blue')
-x = [145,155,165,175,185,195,205,215,225,235,245,255,265,275,285]
-y = [0,10,20,30,40,50,60,70,80]
-plt.xticks(np.arange(min(x), max(x)+1, 1.0))
-
+plt.hist(weight_lst, bins= 12, color = 'blue', edgecolor= 'black', linewidth= 1.2)
 plt.xlim(145, 285)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
-plt.title("Weights of MLB Players", fontsize = 20)
+plt.title("Weights of MLB Players ", fontsize = 20)
 plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
-
-plt.vlines(170, 0, 4, color = "orange")
-plt.vlines(180, 0, 4, color = "orange")
-plt.vlines(190, 0, 17, color = "orange")
-plt.vlines(200, 0, 18, color = "orange")
-plt.vlines(210, 0, 7, color = "orange")
-plt.vlines(220, 0, 6, color = "orange")
-plt.vlines(230, 0, 6, color = "orange")
-plt.vlines(240, 0, 4, color = "orange")
-plt.vlines(250, 0, 2, color = "orange")
-plt.vlines(260, 0, 1, color = "orange")
-plt.vlines(270, 0, 2, color = "orange")
+'''
+plt.vlines(156.7, 0, 4, color = "orange")
+plt.vlines(168.4, 0, 3, color = "orange")
+plt.vlines(180, 0, 6, color = "orange")
+plt.vlines(191.8, 0, 7, color = "orange")
+plt.vlines(203.5, 0, 7, color = "orange")
+plt.vlines(215.2, 0, 6, color = "orange")
+plt.vlines(224, 0, 6, color = "orange")
+plt.vlines(238.6, 0, 4, color = "orange")
+plt.vlines(250.3, 0, 2, color = "orange")
+plt.vlines(262, 0, 1, color = "orange")
+plt.vlines(273.7, 0, 2, color = "orange")
 
 plt.hlines(1, 160, 180, color = "orange")
 plt.hlines(3, 180, 190, color = "orange")
@@ -189,7 +184,9 @@ plt.hlines(4, 230, 240, color = "orange")
 plt.hlines(2, 240, 250, color = "orange")
 plt.hlines(1, 250, 270, color = "orange")
 plt.hlines(2, 270, 280, color = "orange")
+'''
 plt.show()
+
 
 
 #BAR CHART SAMPLE
