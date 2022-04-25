@@ -68,15 +68,19 @@ def addPlayerWeightsToTable(cur, conn, tup_lst):
             count += 1
     conn.commit()
 
-weight_lst = []
-
-def get_avg_weight(players_data, weight_lst):   
+def get_avg_weight(players_data):   
+    weight_lst = []
     for i in players_data:
         weight = i[1]
         weight_lst.append(weight)
-    weight_lst = sorted(weight_lst)
-    min_max = (weight_lst[0], weight_lst[-1])
-    return min_max
+    print(sorted(weight_lst))
+    count = len(weight_lst)
+    total_weight = 0
+    for number in weight_lst:
+        total_weight += int(number)
+    avg_weight = total_weight/count
+    print(avg_weight)
+    return avg_weight
 
 def avg_weight(cur, conn):
     cur.execute('SELECT AVG(weight) FROM Detroit_NHL')
@@ -112,7 +116,7 @@ def main():
     #teams = team_data(cur,conn)
     players_data = get_player_data(cur, conn)
    #addPlayerWeightsToTable(cur, conn, players_data)
-    get_avg_weight(players_data, weight_lst)
+    get_avg_weight(players_data)
     print(avg_weight(cur, conn))
     #for num in range(len(teams)):
         #players_per_team(team_count, num+1, cur, conn)
@@ -121,12 +125,10 @@ def main():
 main()
 #Histogram
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color = 'blue', edgecolor= 'black', linewidth= 1.2)
+plt.hist(weight, bins= 12, color = 'red', edgecolor= 'black', linewidth= 1.2)
 plt.xlim(145, 285)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
-plt.title("Weights of MLB Players ", fontsize = 20)
+plt.title("Weights of NHL Players ", fontsize = 20)
 plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
-plt.xlabel
-
 
