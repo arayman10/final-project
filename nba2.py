@@ -47,12 +47,9 @@ weight_lst = []
 def sorting_weights(lst):
     for i in player_weight:
         lst.append(i[1])
-    count = len(lst)
-    total_weight = 0
-    for number in lst:
-        total_weight += int(number)
-    avg_weight = total_weight/count
-    return avg_weight
+    lst = sorted(lst)
+    min_max_tup = (lst[0], lst[-1])
+    return min_max_tup
 
 def avg_weight(cur, conn):
     cur.execute('SELECT AVG(weight) FROM Detroit_NBA')
@@ -65,7 +62,7 @@ def main():
     createNbaTable(cur, conn)
     getPlayerData(player_weight)
     addPlayerWeightsToTable(cur, conn, player_weight)
-    sorting_weights(weight_lst)
+    print(sorting_weights(weight_lst))
     print(avg_weight(cur, conn))
 main()
 
