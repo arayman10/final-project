@@ -100,7 +100,7 @@ sizes = [16, 2, 3, 17, 15, 20, 3, 13, 15, 1, 1, 2, 2]
 
 plt.pie(sizes, labels=labels)
 plt.axis('equal')
-plt.show
+plt.show()
 
 def main():
     cur,conn = setUpDatabase('final.db')
