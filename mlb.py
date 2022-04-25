@@ -136,20 +136,43 @@ def get_avg_weight(lst):
     avg_weight = total_weight/count
     print(avg_weight)
     return avg_weight
+    
 
+
+
+def main():
+    cur, conn = setUpDatabase('final.db')
+    createMlbTable(cur, conn)
+    get_tigers_players(tigers_player_weight)
+    get_yankees_player(yankees_player_weight)
+    get_dodgers_player(dodgers_player_weight)
+    add_to_table(cur,conn,tigers_player_weight)
+    add_to_table2(cur,conn,yankees_player_weight)
+    add_to_table3(cur,conn,dodgers_player_weight)
+    get_avg_weight(weight_lst)
+    print(weight_lst)
+main()
+
+print(len(weight_lst))
 #GRAPHING
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color= 'green')
-plt.xlim(160, 280)
+import numpy as np
+plt.hist(weight_lst, bins= 12, color= 'blue')
+x = [145,155,165,175,]
+y = [0,1,2,3,4]
+plt.plot(x,y)
+plt.xticks(np.arange(min(x), max(x)+1, 1.0))
+
+plt.xlim(145, 285)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
 plt.title("Weights of MLB Players", fontsize = 20)
 plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
 
-plt.vlines(170, 0, 1, color = "orange")
-plt.vlines(180, 0, 3, color = "orange")
-plt.vlines(190, 0, 6, color = "orange")
-plt.vlines(200, 0, 7, color = "orange")
+plt.vlines(170, 0, 4, color = "orange")
+plt.vlines(180, 0, 4, color = "orange")
+plt.vlines(190, 0, 17, color = "orange")
+plt.vlines(200, 0, 18, color = "orange")
 plt.vlines(210, 0, 7, color = "orange")
 plt.vlines(220, 0, 6, color = "orange")
 plt.vlines(230, 0, 6, color = "orange")
@@ -185,15 +208,4 @@ plt.bar(x_title, y_title, color = color_lst)
 plt.show()
 
 
-def main():
-    cur, conn = setUpDatabase('final.db')
-    createMlbTable(cur, conn)
-    get_tigers_players(tigers_player_weight)
-    get_yankees_player(yankees_player_weight)
-    get_dodgers_player(dodgers_player_weight)
-    add_to_table(cur,conn,tigers_player_weight)
-    add_to_table2(cur,conn,yankees_player_weight)
-    add_to_table3(cur,conn,dodgers_player_weight)
-    get_avg_weight(weight_lst)
-    print(weight_lst)
-main()
+
