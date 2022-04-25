@@ -47,47 +47,12 @@ weight_lst = []
 def get_avg_weight(lst):
     for i in player_weight:
         lst.append(i[1])
-    print(sorted(lst))
     count = len(lst)
     total_weight = 0
     for number in lst:
         total_weight += int(number)
     avg_weight = total_weight/count
-    print(avg_weight)
     return avg_weight
-
-import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color = 'green')
-plt.xlim(165, 295)
-#plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
-plt.title("Weights of NBA Players", fontsize = 20)
-plt.xlabel("Weight", fontsize= 14)
-plt.ylabel("Count of Players", fontsize = 14)
-
-plt.vlines(170, 0, 1, color = "orange")
-plt.vlines(180, 0, 3, color = "orange")
-plt.vlines(190, 0, 6, color = "orange")
-plt.vlines(200, 0, 7, color = "orange")
-plt.vlines(210, 0, 7, color = "orange")
-plt.vlines(220, 0, 6, color = "orange")
-plt.vlines(230, 0, 6, color = "orange")
-plt.vlines(240, 0, 4, color = "orange")
-plt.vlines(250, 0, 2, color = "orange")
-plt.vlines(260, 0, 1, color = "orange")
-plt.vlines(270, 0, 2, color = "orange")
-
-plt.hlines(1, 160, 180, color = "orange")
-plt.hlines(3, 180, 190, color = "orange")
-plt.hlines(6, 190, 200, color = "orange")
-plt.hlines(7, 200, 210, color = "orange")
-plt.hlines(6, 210, 230, color = "orange")
-plt.hlines(4, 230, 240, color = "orange")
-plt.hlines(2, 240, 250, color = "orange")
-plt.hlines(1, 250, 270, color = "orange")
-plt.hlines(2, 270, 280, color = "orange")
-plt.show()
-
-
 
 def main():
     cur, conn = setUpDatabase('final.db')
@@ -96,5 +61,47 @@ def main():
     addPlayerWeightsToTable(cur, conn, player_weight)
     get_avg_weight(weight_lst)
 main()
+
+import matplotlib.pyplot as plt
+plt.hist(weight_lst, bins= 12, color= 'orange')
+plt.xlim(170, 290)
+#plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 28))
+plt.title("Weights of NBA Players", fontsize = 20)
+plt.xlabel("Weight", fontsize= 14)
+plt.ylabel("Count of Players", fontsize = 14)
+
+
+
+plt.vlines(170, 0, 37, color = "black")
+plt.vlines(180, 0, 37, color = "black")
+plt.vlines(190, 0, 51, color = "black")
+plt.vlines(200, 0, 69, color = "black")
+plt.vlines(210, 0, 70, color = "black")
+plt.vlines(220, 0, 73, color = "black")
+plt.vlines(230, 0, 73, color = "black")
+plt.vlines(240, 0, 55, color = "black")
+plt.vlines(250, 0, 53, color = "black")
+plt.vlines(260, 0, 28, color = "black")
+plt.vlines(270, 0, 13, color = "black")
+plt.vlines(280, 0, 9, color = "black")
+plt.vlines(290, 0, 1, color = "black")
+
+plt.hlines(16, 170, 180, color = "black")
+plt.hlines(37, 180, 190, color = "black")
+plt.hlines(51, 190, 200, color = "black")
+plt.hlines(69, 200, 210, color = "black")
+plt.hlines(70, 210, 220, color = "black")
+plt.hlines(73, 220, 230, color = "black")
+plt.hlines(55, 230, 240, color = "black")
+plt.hlines(53, 240, 250, color = "black")
+plt.hlines(28, 250, 260, color = "black")
+plt.hlines(13, 260, 270, color = "black")
+plt.hlines(9, 270, 280, color = "black")
+plt.hlines(1, 280, 290, color = "black")
+plt.show()
+
+
+
+
 
 
