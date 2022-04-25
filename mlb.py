@@ -139,7 +139,7 @@ def get_avg_weight(lst):
     
 #GRAPHING
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12)
+plt.hist(weight_lst, bins= 12, color= 'green')
 plt.xlim(160, 280)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
 plt.title("Weights of Detroit Tigers Players", fontsize = 20)
@@ -169,7 +169,7 @@ plt.hlines(1, 250, 270, color = "orange")
 plt.hlines(2, 270, 280, color = "orange")
 plt.show()
 
-
+'''
 #BAR CHART SAMPLE
 import matplotlib.pyplot as plt
 tigers_avg_weight = 214.5
@@ -183,7 +183,8 @@ plt.xlabel("Team", fontsize = 12 )
 plt.ylabel("Average Player Weight", fontsize= 12)
 plt.bar(x_title, y_title, color = color_lst)
 plt.show()
-
+'''
+plt.show()
 
 def main():
     cur, conn = setUpDatabase('mlb.db')
