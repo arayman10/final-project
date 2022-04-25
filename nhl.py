@@ -95,7 +95,7 @@ def players_per_team(dict, num, cur, conn):
             dict[team[0][0]] += 1
     conn.commit()
     return None
-
+'''
 #create pie chart
 labels = 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins', 'Boston Bruins', 'Montréal Canadiens', 'Toronto Maple Leafs', 'Washington Capitals', 'Chicago Blackhawks', 'Detroit Red Wings', 'St. Louis Blues', 'Edmonton Oilers', 'Vancouver Canucks', 'Los Angeles Kings'
 sizes = [16, 2, 3, 17, 15, 20, 3, 13, 15, 1, 1, 2, 2]
@@ -104,7 +104,7 @@ plt.pie(sizes, labels=labels, autopct='%1.1f%%', labeldistance=0.85, radius=5)
 plt.title("Players Per NHL Team")
 plt.axis('equal')
 plt.show()
-
+'''
 def main():
     cur,conn = setUpDatabase('final.db')
     create_nhl_table(cur, conn)
@@ -121,12 +121,13 @@ def main():
 main()
 #Histogram
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color = 'blue', edgecolor= 'black', linewidth= 1.2)
+plt.hist(weight_lst, bins= 12, color = 'red', edgecolor= 'black', linewidth= 1.2)
 plt.xlim(145, 285)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
-plt.title("Weights of MLB Players ", fontsize = 20)
+plt.title("Weights of NHL Players ", fontsize = 20)
 plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
 plt.xlabel
+plt.show()
 
 
