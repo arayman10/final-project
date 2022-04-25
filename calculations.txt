@@ -1,0 +1,1 @@
+The average weight of the NBA players in the Detroit_NBA table,217.97684210526316
