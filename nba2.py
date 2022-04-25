@@ -44,7 +44,7 @@ def addPlayerWeightsToTable(cur, conn, lst):
     conn.commit()
 
 weight_lst = []
-def get_avg_weight(lst):
+def sorting_weights(lst):
     for i in player_weight:
         lst.append(i[1])
     count = len(lst)
@@ -65,7 +65,7 @@ def main():
     createNbaTable(cur, conn)
     getPlayerData(player_weight)
     addPlayerWeightsToTable(cur, conn, player_weight)
-    get_avg_weight(weight_lst)
+    sorting_weights(weight_lst)
     print(avg_weight(cur, conn))
 main()
 
