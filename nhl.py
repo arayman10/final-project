@@ -125,7 +125,7 @@ def main():
 main()
 #Histogram
 import matplotlib.pyplot as plt
-plt.hist(, bins= 12, color = 'red', edgecolor= 'black', linewidth= 1.2)
+plt.hist(weight_lst, bins= 12, color = 'red', edgecolor= 'black', linewidth= 1.2)
 plt.xlim(145, 285)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
 plt.title("Weights of NHL Players ", fontsize = 20)
