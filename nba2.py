@@ -2,6 +2,7 @@ import requests
 import sqlite3
 import os
 import json
+import csv
 
 
 def setUpDatabase(db_name):
@@ -44,17 +45,25 @@ def addPlayerWeightsToTable(cur, conn, lst):
     conn.commit()
 
 weight_lst = []
-def sorting_weights(lst):
+def sorting_weights(lst, filename):
     for i in player_weight:
         lst.append(i[1])
     lst = sorted(lst)
     min_max_tup = (lst[0], lst[-1])
+    with open(filename, 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow(('The minimum and maximum weights of NBA players in the Detroit_NBA table', min_max_tup))
+    file.close()
     return min_max_tup
 
-def avg_weight(cur, conn):
+def avg_weight(cur, conn, filename):
     cur.execute('SELECT AVG(weight) FROM Detroit_NBA')
     avg = cur.fetchone()[0]
     conn.commit()
+    with open(filename, 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow(('The average weight of the NBA players in the Detroit_NBA table', avg))
+    file.close()
     return avg
 
 def main():
@@ -62,8 +71,8 @@ def main():
     createNbaTable(cur, conn)
     getPlayerData(player_weight)
     addPlayerWeightsToTable(cur, conn, player_weight)
-    print(sorting_weights(weight_lst))
-    print(avg_weight(cur, conn))
+    print(sorting_weights(weight_lst, 'calculations.txt'))
+    print(avg_weight(cur, conn, 'calculations.txt'))
 main()
 
 import matplotlib.pyplot as plt
