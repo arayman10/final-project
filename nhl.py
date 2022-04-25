@@ -73,15 +73,10 @@ def sorted_weights(players_data):
     for i in players_data:
         weight = i[1]
         weight_lst.append(weight)
-    print(sorted(weight_lst))
-    count = len(weight_lst)
-    total_weight = 0
-    for number in weight_lst:
-        total_weight += int(number)
-    avg_weight = total_weight/count
-    print(avg_weight)
-    return avg_weight
-
+    sort_lst = sorted(weight_lst)
+    min_max = (sort_lst[0], sort_lst[-1])
+    print(min_max)
+    return min_max
 
 def avg_weight(cur, conn):
     cur.execute('SELECT AVG(weight) FROM Detroit_NHL')
