@@ -59,13 +59,16 @@ def get_avg_weight(lst):
     return avg_weight
 
 import matplotlib.pyplot as plt
-plt.hist(weight_lst, bins= 12, color = 'orange')
+#plt.hist(weight_lst, bins= 12, color = 'orange')
+#plt.hist(weight_lst, color = "blue", ec="orange")
+plt.hist(weight_lst, bins= 12, color= 'r')
 plt.xlim(165, 295)
 #plt.hist(tigers_rosters_int, binedges= plt.xlim(160, 280))
 plt.title("Weights of NBA Players", fontsize = 20)
 plt.xlabel("Weight", fontsize= 14)
 plt.ylabel("Count of Players", fontsize = 14)
 
+'''
 plt.vlines(170, 0, 1, color = "orange")
 plt.vlines(180, 0, 3, color = "orange")
 plt.vlines(190, 0, 6, color = "orange")
@@ -88,7 +91,8 @@ plt.hlines(2, 240, 250, color = "orange")
 plt.hlines(1, 250, 270, color = "orange")
 plt.hlines(2, 270, 280, color = "orange")
 plt.show()
-
+'''
+plt.show()
 
 
 def main():
