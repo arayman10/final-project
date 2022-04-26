@@ -52,7 +52,7 @@ def sorting_weights(lst, filename):
     min_max_tup = (lst[0], lst[-1])
     with open(filename, 'w') as file:
         writer = csv.writer(file)
-        writer.writerow(('The minimum and maximum weights of NBA players in the Detroit_NBA table ', min_max_tup))
+        writer.writerow(f'The minimum and maximum weights of NBA players in the Detroit_NBA table {min_max_tup}')
     file.close()
     return min_max_tup
 
