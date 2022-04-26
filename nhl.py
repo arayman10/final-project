@@ -4,6 +4,7 @@ import os
 import json
 import time
 import matplotlib.pyplot as plt
+import csv
 
 def setUpDatabase(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
@@ -70,18 +71,26 @@ def addPlayerWeightsToTable(cur, conn, tup_lst):
 
 weight_lst = []
 
-def get_avg_weight(players_data, lst):   
+def sorted_weights(players_data, lst, filename):   
     for i in players_data:
         weight = i[1]
         lst.append(weight)
     lst = sorted(lst)
     min_max = (lst[0], lst[-1])
+    with open(filename, 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow (f'The minimum and maximum weights of NHL players in the Detroit_NHL table {min_max}')
+    file.close()
     return min_max
 
-def avg_weight(cur, conn):
+def avg_weight(cur, conn, filename):
     cur.execute('SELECT AVG(weight) FROM Detroit_NHL')
     avg = cur.fetchone()[0]
     conn.commit()
+    with open(filename, 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow(('The average weight of the NHL players in the Detroit_NHL table ', avg))
+    file.close()
     return avg
 
 team_count = {}
@@ -103,8 +112,8 @@ def main():
     teams = team_data(cur,conn)
     players_data = get_player_data(cur, conn)
     addPlayerWeightsToTable(cur, conn, players_data)
-    get_avg_weight(players_data, weight_lst)
-    print(avg_weight(cur, conn))
+    sorted_weights(players_data, weight_lst, 'calculations.txt')
+    print(avg_weight(cur, conn, 'calculations.txt'))
     for num in range(len(teams)):
         players_per_team(team_count, num+1, cur, conn)
     print(team_count)
