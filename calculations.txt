@@ -4,3 +4,4 @@ The minimum and maximum weights of NHL players in the Detroit_NHL table ,"(135, 
 The average weight of the NHL players in the Detroit_NHL table ,174.11818181818182
 The minimum and maximum weights of MLB players in the MLB_Players table,"(145, 282)"
 The average weight of the MLB players in the MLB_Players table,209.35
+NHL teams and players per team in final.db: ,"{'New York Rangers': 16, 'Philadelphia Flyers': 2, 'Pittsburgh Penguins': 3, 'Boston Bruins': 17, 'Montréal Canadiens': 15, 'Toronto Maple Leafs': 20, 'Washington Capitals': 3, 'Chicago Blackhawks': 13, 'Detroit Red Wings': 15, 'St. Louis Blues': 1, 'Edmonton Oilers': 1, 'Vancouver Canucks': 2, 'Los Angeles Kings': 2}"
