@@ -1,3 +1,0 @@
-The average weight of the NHL players in the Detroit_NHL table ,174.11818181818182
-T,h,e, ,m,i,n,i,m,u,m, ,a,n,d, ,m,a,x,i,m,u,m, ,w,e,i,g,h,t,s, ,o,f, ,N,H,L, ,p,l,a,y,e,r,s, ,i,n, ,t,h,e, ,D,e,t,r,o,i,t,_,N,H,L, ,t,a,b,l,e, ,(,1,3,5,",", ,2,4,8,)
-The average weight of the NHL players in the Detroit_NHL table ,174.11818181818182
