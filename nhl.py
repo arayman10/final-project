@@ -77,7 +77,7 @@ def sorted_weights(players_data, lst, filename):
         lst.append(weight)
     lst = sorted(lst)
     min_max = (lst[0], lst[-1])
-    with open(filename, 'w') as file:
+    with open(filename, 'a') as file:
         writer = csv.writer(file)
         writer.writerow (f'The minimum and maximum weights of NHL players in the Detroit_NHL table {min_max}')
     file.close()
@@ -87,7 +87,7 @@ def avg_weight(cur, conn, filename):
     cur.execute('SELECT AVG(weight) FROM Detroit_NHL')
     avg = cur.fetchone()[0]
     conn.commit()
-    with open(filename, 'w') as file:
+    with open(filename, 'a') as file:
         writer = csv.writer(file)
         writer.writerow(('The average weight of the NHL players in the Detroit_NHL table ', avg))
     file.close()
