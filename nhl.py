@@ -105,6 +105,12 @@ def players_per_team(dict, num, cur, conn):
     conn.commit()
     return None
 
+with open('calculations.txt', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow(('NHL teams and players per team in final.db: ', team_count))
+file.close()
+
+
 def main():
     cur,conn = setUpDatabase('final.db')
     create_nhl_table(cur, conn)
@@ -112,8 +118,8 @@ def main():
     teams = team_data(cur,conn)
     players_data = get_player_data(cur, conn)
     addPlayerWeightsToTable(cur, conn, players_data)
-    sorted_weights(players_data, weight_lst, 'calculations.txt')
-    print(avg_weight(cur, conn, 'calculations.txt'))
+    #sorted_weights(players_data, weight_lst, 'calculations.txt')
+    #print(avg_weight(cur, conn, 'calculations.txt'))
     for num in range(len(teams)):
         players_per_team(team_count, num+1, cur, conn)
     print(team_count)
