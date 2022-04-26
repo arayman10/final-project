@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import sqlite3
+import csv
 '''
 def get_tigers_weight_data(player):
     base_url = "http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part=" + "'" + player + "'"
@@ -121,21 +122,30 @@ def add_to_table3(cur, conn, lst):
     conn.commit()
 
 weight_lst = []
-def get_avg_weight(lst):
+def sorting_weights(lst, filename):
     for i in tigers_player_weight:
         lst.append(i[1])
     for i in yankees_player_weight:
         lst.append(i[1])
     for i in dodgers_player_weight:
         lst.append(i[1])
-    print(sorted(lst))
-    count = len(lst)
-    total_weight = 0
-    for number in lst:
-        total_weight += int(number)
-    avg_weight = total_weight/count
-    print(avg_weight)
-    return avg_weight
+    lst = sorted(lst)
+    min_max_tup = (lst[0], lst[-1])
+    with open(filename, 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow (('The minimum and maximum weights of MLB players in the MLB_Players table', min_max_tup))
+    file.close()
+    return min_max_tup
+
+def avg_weight(cur, conn, filename):
+    cur.execute('SELECT AVG(weight) FROM MLB_Players')
+    avg = cur.fetchone()[0]
+    conn.commit()
+    with open(filename, 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow(('The average weight of the MLB players in the MLB_Players table', avg))
+    file.close()
+    return avg
     
 
 
@@ -149,7 +159,8 @@ def main():
     add_to_table(cur,conn,tigers_player_weight)
     add_to_table2(cur,conn,yankees_player_weight)
     add_to_table3(cur,conn,dodgers_player_weight)
-    get_avg_weight(weight_lst)
+    sorting_weights(weight_lst, 'calculations.txt')
+    avg_weight(cur, conn, 'calculations.txt')
     print(weight_lst)
 main()
 
