@@ -1,1 +1,1 @@
-The average weight of the NBA players in the Detroit_NBA table ,217.97684210526316
+The average weight of the NHL players in the Detroit_NHL table ,174.11818181818182
